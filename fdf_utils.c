@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/13 15:55:43 by jludt             #+#    #+#             */
-/*   Updated: 2021/08/13 16:51:41 by jludt            ###   ########.fr       */
+/*   Updated: 2021/08/16 09:14:06 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "fdf.h"
+
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = data->data_addr + (y * data->size_line + x * (data->bits_per_pixel / 8));
+	*(unsigned int*)dst = color;
+}
 
 void	initialize_map(t_data *data)
 {

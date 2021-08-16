@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/08/13 16:17:41 by jludt            ###   ########.fr       */
+/*   Updated: 2021/08/16 09:13:07 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,6 @@ typedef struct s_data
 void	fdf_read(char *src, t_data *data);
 int		fdf_draw(t_data *data);
 void	initialize_map(t_data *data);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 
 #endif
