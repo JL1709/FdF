@@ -6,7 +6,7 @@
 #    By: julian <julian@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/11 12:13:12 by jludt             #+#    #+#              #
-#    Updated: 2021/08/17 13:31:26 by julian           ###   ########.fr        #
+#    Updated: 2021/08/17 17:35:17 by julian           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,6 @@ CC = gcc
 MLXPATH = ./mlx/libmlx.a
 
 LIBFTPATH = ./libft/libft.a
-
 
 CFLAGS = -Wall -Werror -Wextra $(MLXPATH) $(LIBFTPATH) -framework OpenGL -framework AppKit
 

@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/13 13:34:47 by jludt             #+#    #+#             */
-/*   Updated: 2021/08/17 13:49:14 by julian           ###   ########.fr       */
+/*   Updated: 2021/08/17 18:41:59 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ static void	bresenham(t_data *data)
 }
 
 /*
-**	isometric projection:
-**	- change coordinates by using isometric formulas:
+** isometric projection:
+** - change coordinates by using isometric formulas:
 **		x` = (x - y) * cos(angle)
 **		y` = (x + y) * sin(angle) - z
-**	- x` and y` are coordinates in 3D format
+** - x` and y` are coordinates in 3D format
 */
 
 static void	isometric_vertical(t_data *data, int x, int y)
@@ -118,8 +118,6 @@ int			fdf_draw(t_data *data)
 		x = 0;
 		while (x < data->width)
 		{
-			data->x0 = x;
-			data->y0 = y;
 			if (x < data->width - 1)
 				isometric_horizontal(data, x, y);
 			if (y < data->height - 1)

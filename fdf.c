@@ -6,15 +6,18 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 11:16:27 by jludt             #+#    #+#             */
-/*   Updated: 2021/08/17 13:32:34 by julian           ###   ########.fr       */
+/*   Updated: 2021/08/17 19:22:34 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdio.h>
 
 int	main(int argc, char *argv[])
 {
 	t_data	*data;
+	// int		x;
+	// int		y;
 
 	if (argc != 2)
 		return (0);
@@ -22,6 +25,21 @@ int	main(int argc, char *argv[])
 	if (data == NULL)
 		return (0);
 	fdf_read(argv[1], data);
+	//printf("data->width = %i\n", data->width);
+	// y = 0;
+	// while (y < data->height)
+	// {
+	// 	x = 0;
+	// 	while(x < data->width)
+	// 	{
+	// 		printf("%i", data->depth[y][x]);
+	// 		printf(" ");
+	// 		x++;
+	// 	}
+	// 	printf("\n");
+	// 	y++;
+	// }
+	
 	initialize_map(data);
 	data->init = mlx_init();
 	data->win = mlx_new_window(data->init, WINDOW_WIDTH, WINDOW_HEIGHT, "FdF");
