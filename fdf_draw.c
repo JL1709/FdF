@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/13 13:34:47 by jludt             #+#    #+#             */
-/*   Updated: 2021/08/17 18:41:59 by julian           ###   ########.fr       */
+/*   Updated: 2021/08/17 20:42:23 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static void	put_pixel(t_data *data)
 	if ((x > 0 && y > 0) && (x < WINDOW_WIDTH && y < WINDOW_HEIGHT))
 	{
 		pos = y * data->size_line + x * (data->bits_per_pixel / 8);
-		data->data_addr[pos] = data->red;
+		data->data_addr[pos] = data->blue;
 		data->data_addr[pos + 1] = data->green;
-		data->data_addr[pos + 2] = data->blue;
+		data->data_addr[pos + 2] = data->red;
 	}
 }
 

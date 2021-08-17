@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 13:30:31 by julian            #+#    #+#             */
-/*   Updated: 2021/08/17 20:19:19 by julian           ###   ########.fr       */
+/*   Updated: 2021/08/17 20:39:01 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	initialize_map(t_data *data)
 {
-	data->scale_depth = 1.00;
+	data->scale_depth = 2.00;
 	data->angle_x = cos(0.6);
 	data->angle_y = sin(0.4);
 	data->zoom = ((WINDOW_WIDTH / data->width) \
 				+ (WINDOW_HEIGHT / data->height)) / 3;
-	data->red = 0x00;
-	data->green = 0x6F;
 	data->blue = 0x00;
+	data->green = 0x6F;
+	data->red = 0x00;
 }
 
 void	initialize_bresenham(t_data *data)
