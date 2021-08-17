@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/08/16 09:13:07 by julian           ###   ########.fr       */
+/*   Updated: 2021/08/17 13:38:09 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,6 @@
 
 typedef struct s_data
 {
-	int		height;
-	int		width;
-	int		**depth;
-	int		coordinate_x;
-	int		coordinate_y;
-	int		x0;
-	int		x1;
-	int		y0;
-	int		y1;
-	double	angle_x;
-	double	angle_y;
-	double	z;
-	int		zoom;
-	int		isometric;
-
 	void	*init;
 	void	*win;
 	void	*img;
@@ -46,6 +31,25 @@ typedef struct s_data
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
+	
+	int		height;
+	int		width;
+	int		**depth;
+	int		x0;
+	int		x1;
+	int		y0;
+	int		y1;
+	float	angle_x;
+	float	angle_y;
+	int		scale_depth;
+	int		zoom;
+
+	int		dx;
+	int		sx;
+	int		dy;
+	int		sy;
+	int		err;
+	int		e2;
 
 	int		red;
 	int		green;
@@ -56,6 +60,7 @@ typedef struct s_data
 void	fdf_read(char *src, t_data *data);
 int		fdf_draw(t_data *data);
 void	initialize_map(t_data *data);
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	initialize_bresenham(t_data *data);
+int		fdf_exit(int key, t_data *data);
 
 #endif

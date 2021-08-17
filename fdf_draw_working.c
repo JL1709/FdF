@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/13 13:34:47 by jludt             #+#    #+#             */
-/*   Updated: 2021/08/16 09:33:23 by julian           ###   ########.fr       */
+/*   Updated: 2021/08/16 13:08:31 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int			fdf_draw(t_data *data)
 	data->img = mlx_new_image(data->init, WINDOW_WIDTH, WINDOW_HEIGHT);
 	data->data_addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
 						&data->size_line, &data->endian);
+	fdf_events(data);
 	y = 0;
 	while (y < data->height)
 	{

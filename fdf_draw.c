@@ -6,90 +6,102 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/13 13:34:47 by jludt             #+#    #+#             */
-/*   Updated: 2021/08/16 09:33:23 by julian           ###   ########.fr       */
+/*   Updated: 2021/08/17 13:46:24 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	put_pixel(t_data *data, int x, int y, double uvector)
+static void	put_pixel(t_data *data)
 {
-	int pos;
-
-	if ((x > 0 && y > 0) && (x < WINDOW_WIDTH && y < WINDOW_HEIGHT))
-	{
-		pos = (x * 4) + (y * WINDOW_WIDTH * 4);
-		data->data_addr[pos] = data->red + uvector;
-		data->data_addr[pos + 1] = data->green + uvector;
-		data->data_addr[pos + 2] = data->blue + uvector;
-		data->data_addr[pos + 3] = 0x7F + uvector;
-	}
-}
-
-static void	draw_lines(t_data *data)
-{
-	double	x;
-	double	y;
-	double	delta_x;
-	double	delta_y;
-	double	uvector;
+	int	pos;
+	int	x;
+	int	y;
 
 	x = data->x0;
 	y = data->y0;
-	delta_x = data->x1 - data->x0;
-	delta_y = data->y1 - data->y0;
-	uvector = sqrt((pow(delta_x, 2)) + (pow(delta_y, 2)));
-	delta_x = delta_x / uvector;
-	delta_y = delta_y / uvector;
-	while (uvector > 0)
+
+	if ((x > 0 && y > 0) && (x < WINDOW_WIDTH && y < WINDOW_HEIGHT))
 	{
-		put_pixel(data, x, y, uvector);
-		x += delta_x;
-		y += delta_y;
-		uvector--;
+		pos = y * data->size_line + x * (data->bits_per_pixel / 8);
+		data->data_addr[pos] = data->red;
+		data->data_addr[pos + 1] = data->green;
+		data->data_addr[pos + 2] = data->blue;
 	}
-	
 }
 
-static void	draw_vertical(t_data *data, int x, int y)
-{
-	int	x_3D;
-	int	y_3D;
+/*
+** https://de.wikipedia.org/wiki/Bresenham-Algorithmus
+*/
 
-	x_3D = x - data->width / 2;
-	y_3D = y - data->height / 2;
-	data->x0 = data->angle_x * (x_3D - y_3D) * data->zoom;
-	data->y0 = data->angle_y * (x_3D + y_3D) * data->zoom;
-	data->y0 -= data->depth[y][x] * data->z;
-	data->x1 = data->angle_x * (x_3D - (y_3D + 1)) * data->zoom;
-	data->y1 = data->angle_y * (x_3D + (y_3D + 1)) * data->zoom;
-	data->y1 -= data->depth[y + 1][x] * data->z;
-	data->x0 += (WINDOW_WIDTH / 2) + data->coordinate_x;
-	data->x1 += (WINDOW_WIDTH / 2) + data->coordinate_x;
-	data->y0 += (WINDOW_HEIGHT / 2) + data->coordinate_y;
-	data->y1 += (WINDOW_HEIGHT / 2) + data->coordinate_y;
-	draw_lines(data);
+static void	bresenham(t_data *data)
+{
+	initialize_bresenham(data);
+	while (1) 
+	{
+		put_pixel(data);
+		if (data->x0 == data->x1 && data->y0 == data->y1) 
+			break;
+		data->e2 = 2 * data->err;
+		if (data->e2 > data->dy) 
+		{
+			data->err += data->dy; 
+			data->x0 += data->sx; 
+		}
+		if (data->e2 < data->dx) 
+		{
+			data->err += data->dx; 
+			data->y0 += data->sy; 
+		}
+  }
 }
 
+/*
+**	isometric projection:
+**		- change coordinates by using isometric formulas:
+**			x` = (x - y) * cos(angle)
+**			y` = (x + y) * sin(angle) - z
+**		- x` and y` are coordinates in 3D format
+*/
 
-static void	draw_horizontal(t_data *data, int x, int y)
+static void	isometric_vertical(t_data *data, int x, int y)
 {
-	int	x_3D;
-	int	y_3D;
+	int	x_centered;
+	int	y_centered;
 
-	x_3D = x - data->width / 2;
-	y_3D = y - data->height / 2;
-	data->x0 = data->angle_x * (x_3D - y_3D) * data->zoom;
-	data->y0 = data->angle_y * (x_3D + y_3D) * data->zoom;
-	data->y0 -= data->depth[y][x] * data->z;
-	data->x1 = data->angle_x * ((x_3D + 1) - y_3D) * data->zoom;
-	data->y1 = data->angle_y * ((x_3D + 1) + y_3D) * data->zoom;
-	data->y1 -= data->depth[y][x + 1] * data->z;
-	data->x0 += (WINDOW_WIDTH / 2) + data->coordinate_x;
-	data->x1 += (WINDOW_WIDTH / 2) + data->coordinate_x;
-	data->y0 += (WINDOW_HEIGHT / 2) + data->coordinate_y;
-	data->y1 += (WINDOW_HEIGHT / 2) + data->coordinate_y;
-	draw_lines(data);
+	x_centered = x - data->width / 2;
+	y_centered = y - data->height / 2;
+	data->x0 = (x_centered - y_centered) * data->angle_x * data->zoom \
+				+ (WINDOW_WIDTH / 2);
+	data->y0 = (x_centered + y_centered) * data->angle_y * data->zoom \
+				- data->depth[y][x] * data->scale_depth \
+				+ (WINDOW_HEIGHT / 2);
+	data->x1 = (x_centered - (y_centered + 1)) * data->angle_x * data->zoom \
+				+ (WINDOW_WIDTH / 2);
+	data->y1 = (x_centered + (y_centered + 1)) * data->angle_y * data->zoom \
+				- data->depth[y + 1][x] * data->scale_depth \
+				+ (WINDOW_HEIGHT / 2);
+	bresenham(data);
+}
+
+static void	isometric_horizontal(t_data *data, int x, int y)
+{
+	int	x_centered;
+	int	y_centered;
+
+	x_centered = x - data->width / 2;
+	y_centered = y - data->height / 2;
+	data->x0 = (x_centered - y_centered) * data->angle_x * data->zoom \
+				+ (WINDOW_WIDTH / 2);
+	data->y0 = (x_centered + y_centered) * data->angle_y * data->zoom \
+				- data->depth[y][x] * data->scale_depth \
+				+ (WINDOW_HEIGHT / 2);
+	data->x1 = ((x_centered + 1) - y_centered) * data->angle_x * data->zoom \
+				+ (WINDOW_WIDTH / 2);
+	data->y1 = ((x_centered + 1) + y_centered) * data->angle_y * data->zoom \
+				- data->depth[y][x + 1] * data->scale_depth \
+				+ (WINDOW_HEIGHT / 2);
+	bresenham(data);
 }
 
 int			fdf_draw(t_data *data)
@@ -108,10 +120,10 @@ int			fdf_draw(t_data *data)
 		{
 			data->x0 = x;
 			data->y0 = y;
-			if (data->width > x + 1)
-				draw_horizontal(data, x, y);
-			if (data->height > y + 1)
-				draw_vertical(data, x, y);
+			if (x < data->width - 1)
+				isometric_horizontal(data, x, y);
+			if (y < data->height - 1)
+				isometric_vertical(data, x, y);
 			x++;
 		}
 		y++;

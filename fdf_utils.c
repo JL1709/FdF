@@ -5,34 +5,45 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/13 15:55:43 by jludt             #+#    #+#             */
-/*   Updated: 2021/08/16 09:14:06 by julian           ###   ########.fr       */
+/*   Created: 2021/08/17 13:30:31 by julian            #+#    #+#             */
+/*   Updated: 2021/08/17 13:36:58 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "fdf.h"
-
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->data_addr + (y * data->size_line + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
+#include "fdf.h"
 
 void	initialize_map(t_data *data)
 {
-	data->coordinate_x = 0;
-	data->coordinate_y = 0;
-	data->z = 1.00;
-	data->angle_x = cos(M_PI / 3);
-	data->angle_y = data->angle_x * sin(M_PI / 6);
-	if (ceil((data->width > data->height)))
-		data->zoom = (WINDOW_WIDTH / data->width) + 2;
+	data->scale_depth = 2.00;
+	data->angle_x = cos(0.6);
+	data->angle_y = sin(0.4);
+	data->zoom = ((WINDOW_WIDTH / data->width) \
+				+ (WINDOW_HEIGHT / data->height)) / 3;
+	data->red = 0x6F;
+	data->green = 0x6F;
+	data->blue = 0x6F;
+}
+
+void	initialize_bresenham(t_data *data)
+{
+	data->dx = abs(data->x1 - data->x0);
+	if (data->x0 < data->x1)
+		data->sx = 1; 
+	else	
+		data->sx = -1;
+	data->dy = -abs(data->y1 - data->y0);
+	if (data->y0 < data->y1)
+		data->sy = 1;
 	else
-		data->zoom = (WINDOW_HEIGHT / data->height) + 2;
-	data->isometric = 1;
-	data->red = 0x4F;
-	data->green = 0x4F;
-	data->blue = 0x4F;
+		data->sy = -1;
+	data->err = data->dx + data->dy;
+}
+
+int		fdf_exit(int key, t_data *data)
+{
+	(void)	data;
+	
+	if (key == 0x35)
+		exit(0);
+	return (0);
 }
