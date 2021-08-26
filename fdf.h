@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/08/17 13:38:09 by julian           ###   ########.fr       */
+/*   Updated: 2021/08/26 19:10:26 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_data
 	int		x1;
 	int		y0;
 	int		y1;
+	int		x_translate;
+	int		y_translate;
 	float	angle_x;
 	float	angle_y;
 	int		scale_depth;
@@ -61,6 +63,7 @@ void	fdf_read(char *src, t_data *data);
 int		fdf_draw(t_data *data);
 void	initialize_map(t_data *data);
 void	initialize_bresenham(t_data *data);
-int		fdf_exit(int key, t_data *data);
+int		fdf_interactive(int key, t_data *data);
+void	print_usage(t_data *data);
 
 #endif

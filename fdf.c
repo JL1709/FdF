@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 11:16:27 by jludt             #+#    #+#             */
-/*   Updated: 2021/08/17 19:22:34 by julian           ###   ########.fr       */
+/*   Updated: 2021/08/26 18:46:40 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,34 +16,17 @@
 int	main(int argc, char *argv[])
 {
 	t_data	*data;
-	// int		x;
-	// int		y;
 
 	if (argc != 2)
 		return (0);
 	data = (t_data *)malloc(sizeof(t_data));
 	if (data == NULL)
 		return (0);
-	fdf_read(argv[1], data);
-	//printf("data->width = %i\n", data->width);
-	// y = 0;
-	// while (y < data->height)
-	// {
-	// 	x = 0;
-	// 	while(x < data->width)
-	// 	{
-	// 		printf("%i", data->depth[y][x]);
-	// 		printf(" ");
-	// 		x++;
-	// 	}
-	// 	printf("\n");
-	// 	y++;
-	// }
-	
+	fdf_read(argv[1], data);	
 	initialize_map(data);
 	data->init = mlx_init();
 	data->win = mlx_new_window(data->init, WINDOW_WIDTH, WINDOW_HEIGHT, "FdF");
-	mlx_hook(data->win, 2, 3, fdf_exit, data);
+	mlx_hook(data->win, 2, 3, fdf_interactive, data);
 	mlx_loop_hook(data->init, fdf_draw, data);
 	mlx_loop(data->init);
 	free(data);

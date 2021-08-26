@@ -6,7 +6,7 @@
 /*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/13 13:34:47 by jludt             #+#    #+#             */
-/*   Updated: 2021/08/17 20:42:23 by julian           ###   ########.fr       */
+/*   Updated: 2021/08/26 19:09:47 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,15 @@ static void	isometric_vertical(t_data *data, int x, int y)
 	x_centered = x - data->width / 2;
 	y_centered = y - data->height / 2;
 	data->x0 = (x_centered - y_centered) * data->angle_x * data->zoom \
-				+ (WINDOW_WIDTH / 2);
+				+ (WINDOW_WIDTH / 2) + data->x_translate;
 	data->y0 = (x_centered + y_centered) * data->angle_y * data->zoom \
 				- data->depth[y][x] * data->scale_depth \
-				+ (WINDOW_HEIGHT / 2);
+				+ (WINDOW_HEIGHT / 2) + data->y_translate;
 	data->x1 = (x_centered - (y_centered + 1)) * data->angle_x * data->zoom \
-				+ (WINDOW_WIDTH / 2);
+				+ (WINDOW_WIDTH / 2) + data->x_translate;
 	data->y1 = (x_centered + (y_centered + 1)) * data->angle_y * data->zoom \
 				- data->depth[y + 1][x] * data->scale_depth \
-				+ (WINDOW_HEIGHT / 2);
+				+ (WINDOW_HEIGHT / 2) + data->y_translate;
 	bresenham(data);
 }
 
@@ -92,15 +92,15 @@ static void	isometric_horizontal(t_data *data, int x, int y)
 	x_centered = x - data->width / 2;
 	y_centered = y - data->height / 2;
 	data->x0 = (x_centered - y_centered) * data->angle_x * data->zoom \
-				+ (WINDOW_WIDTH / 2);
+				+ (WINDOW_WIDTH / 2) + data->x_translate;
 	data->y0 = (x_centered + y_centered) * data->angle_y * data->zoom \
 				- data->depth[y][x] * data->scale_depth \
-				+ (WINDOW_HEIGHT / 2);
+				+ (WINDOW_HEIGHT / 2) + data->y_translate;
 	data->x1 = ((x_centered + 1) - y_centered) * data->angle_x * data->zoom \
-				+ (WINDOW_WIDTH / 2);
+				+ (WINDOW_WIDTH / 2) + data->x_translate;
 	data->y1 = ((x_centered + 1) + y_centered) * data->angle_y * data->zoom \
 				- data->depth[y][x + 1] * data->scale_depth \
-				+ (WINDOW_HEIGHT / 2);
+				+ (WINDOW_HEIGHT / 2) + data->y_translate;
 	bresenham(data);
 }
 
@@ -127,6 +127,7 @@ int			fdf_draw(t_data *data)
 		y++;
 	}
 	mlx_put_image_to_window(data->init, data->win, data->img, 0, 0);
+	print_usage(data);
 	mlx_destroy_image(data->init, data->img);
 	return(0);
 }
