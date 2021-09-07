@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   initialize_bresenham.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/16 15:34:53 by jludt             #+#    #+#             */
-/*   Updated: 2021/09/07 10:23:37 by jludt            ###   ########.fr       */
+/*   Created: 2021/09/06 16:56:28 by jludt             #+#    #+#             */
+/*   Updated: 2021/09/06 16:56:41 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
-{
-	int	i;
-	int	sign;
-	int	number;
+#include "../fdf.h"
 
-	i = 0;
-	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
-		i++;
-	sign = 1;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
-	}
-	number = 0;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		number = number * 10 + str[i] - 48;
-		i++;
-	}
-	return (number * sign);
+void	initialize_bresenham(t_data *data)
+{
+	data->dx = abs(data->x1 - data->x0);
+	if (data->x0 < data->x1)
+		data->sx = 1;
+	else
+		data->sx = -1;
+	data->dy = -abs(data->y1 - data->y0);
+	if (data->y0 < data->y1)
+		data->sy = 1;
+	else
+		data->sy = -1;
+	data->err = data->dx + data->dy;
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: julian <julian@student.42.fr>              +#+  +:+       +#+         #
+#    By: jludt <jludt@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/11 12:13:12 by jludt             #+#    #+#              #
-#    Updated: 2021/08/17 17:35:17 by julian           ###   ########.fr        #
+#    Updated: 2021/09/07 16:38:39 by jludt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,13 @@ LIBFTPATH = ./libft/libft.a
 CFLAGS = -Wall -Werror -Wextra $(MLXPATH) $(LIBFTPATH) -framework OpenGL -framework AppKit
 
 CFILES =	fdf.c \
-			fdf_read.c \
-			fdf_draw.c \
-			fdf_utils.c \
+			utils/get_input.c \
+			utils/draw_image.c \
+			utils/interactive.c \
+			utils/free_data.c \
+			utils/initialize_bresenham.c \
+			utils/initialize_map.c \
+			utils/print_usage.c \
 			gnl/get_next_line.c \
 			gnl/get_next_line_utils.c 
 

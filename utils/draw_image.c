@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_draw.c                                         :+:      :+:    :+:   */
+/*   draw_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/13 13:34:47 by jludt             #+#    #+#             */
-/*   Updated: 2021/08/26 19:09:47 by julian           ###   ########.fr       */
+/*   Updated: 2021/09/07 16:39:59 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "../fdf.h"
+
+/*
+** https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
+*/
 
 static void	put_pixel(t_data *data)
 {
-	int	pos;
+	int	offset;
 	int	x;
 	int	y;
 
 	x = data->x0;
 	y = data->y0;
-
 	if ((x > 0 && y > 0) && (x < WINDOW_WIDTH && y < WINDOW_HEIGHT))
 	{
-		pos = y * data->size_line + x * (data->bits_per_pixel / 8);
-		data->data_addr[pos] = data->blue;
-		data->data_addr[pos + 1] = data->green;
-		data->data_addr[pos + 2] = data->red;
+		offset = y * data->size_line + x * (data->bits_per_pixel / 8);
+		data->data_addr[offset] = data->blue;
+		data->data_addr[offset + 1] = data->green;
+		data->data_addr[offset + 2] = data->red;
 	}
 }
 
@@ -37,48 +40,47 @@ static void	put_pixel(t_data *data)
 static void	bresenham(t_data *data)
 {
 	initialize_bresenham(data);
-	while (1) 
+	while (1)
 	{
 		put_pixel(data);
-		if (data->x0 == data->x1 && data->y0 == data->y1) 
-			break;
+		if (data->x0 == data->x1 && data->y0 == data->y1)
+			break ;
 		data->e2 = 2 * data->err;
-		if (data->e2 > data->dy) 
+		if (data->e2 > data->dy)
 		{
-			data->err += data->dy; 
-			data->x0 += data->sx; 
+			data->err += data->dy;
+			data->x0 += data->sx;
 		}
-		if (data->e2 < data->dx) 
+		if (data->e2 < data->dx)
 		{
-			data->err += data->dx; 
-			data->y0 += data->sy; 
+			data->err += data->dx;
+			data->y0 += data->sy;
 		}
-  }
+	}
 }
 
 /*
+** http://www.gandraxa.com/isometric_projection.xml
 ** isometric projection:
-** - change coordinates by using isometric formulas:
-**		x` = (x - y) * cos(angle)
-**		y` = (x + y) * sin(angle) - z
-** - x` and y` are coordinates in 3D format
+** x` = (x - y) * cos(α)
+** y` = (x + y) * sin(α) - z
 */
 
 static void	isometric_vertical(t_data *data, int x, int y)
 {
-	int	x_centered;
-	int	y_centered;
+	int	xc;
+	int	yc;
 
-	x_centered = x - data->width / 2;
-	y_centered = y - data->height / 2;
-	data->x0 = (x_centered - y_centered) * data->angle_x * data->zoom \
+	xc = x - data->width / 2;
+	yc = y - data->height / 2;
+	data->x0 = (xc - yc) * data->angle_x * data->zoom \
 				+ (WINDOW_WIDTH / 2) + data->x_translate;
-	data->y0 = (x_centered + y_centered) * data->angle_y * data->zoom \
+	data->y0 = (xc + yc) * data->angle_y * data->zoom \
 				- data->depth[y][x] * data->scale_depth \
 				+ (WINDOW_HEIGHT / 2) + data->y_translate;
-	data->x1 = (x_centered - (y_centered + 1)) * data->angle_x * data->zoom \
+	data->x1 = (xc - (yc + 1)) * data->angle_x * data->zoom \
 				+ (WINDOW_WIDTH / 2) + data->x_translate;
-	data->y1 = (x_centered + (y_centered + 1)) * data->angle_y * data->zoom \
+	data->y1 = (xc + (yc + 1)) * data->angle_y * data->zoom \
 				- data->depth[y + 1][x] * data->scale_depth \
 				+ (WINDOW_HEIGHT / 2) + data->y_translate;
 	bresenham(data);
@@ -86,27 +88,31 @@ static void	isometric_vertical(t_data *data, int x, int y)
 
 static void	isometric_horizontal(t_data *data, int x, int y)
 {
-	int	x_centered;
-	int	y_centered;
+	int	xc;
+	int	yc;
 
-	x_centered = x - data->width / 2;
-	y_centered = y - data->height / 2;
-	data->x0 = (x_centered - y_centered) * data->angle_x * data->zoom \
+	xc = x - data->width / 2;
+	yc = y - data->height / 2;
+	data->x0 = (xc - yc) * data->angle_x * data->zoom \
 				+ (WINDOW_WIDTH / 2) + data->x_translate;
-	data->y0 = (x_centered + y_centered) * data->angle_y * data->zoom \
+	data->y0 = (xc + yc) * data->angle_y * data->zoom \
 				- data->depth[y][x] * data->scale_depth \
 				+ (WINDOW_HEIGHT / 2) + data->y_translate;
-	data->x1 = ((x_centered + 1) - y_centered) * data->angle_x * data->zoom \
+	data->x1 = ((xc + 1) - yc) * data->angle_x * data->zoom \
 				+ (WINDOW_WIDTH / 2) + data->x_translate;
-	data->y1 = ((x_centered + 1) + y_centered) * data->angle_y * data->zoom \
+	data->y1 = ((xc + 1) + yc) * data->angle_y * data->zoom \
 				- data->depth[y][x + 1] * data->scale_depth \
 				+ (WINDOW_HEIGHT / 2) + data->y_translate;
 	bresenham(data);
 }
 
-int			fdf_draw(t_data *data)
+/*
+** https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
+*/
+
+int	draw_image(t_data *data)
 {
-	int	x; 
+	int	x;
 	int	y;
 
 	data->img = mlx_new_image(data->init, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -129,5 +135,5 @@ int			fdf_draw(t_data *data)
 	mlx_put_image_to_window(data->init, data->win, data->img, 0, 0);
 	print_usage(data);
 	mlx_destroy_image(data->init, data->img);
-	return(0);
+	return (0);
 }

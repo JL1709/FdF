@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/08/26 19:10:26 by julian           ###   ########.fr       */
+/*   Updated: 2021/09/07 16:38:31 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_data
 	int		bits_per_pixel;
 	int		size_line;
 	int		endian;
-	
+
 	int		height;
 	int		width;
 	int		**depth;
@@ -56,14 +56,32 @@ typedef struct s_data
 	int		red;
 	int		green;
 	int		blue;
-	
 }			t_data;
 
-void	fdf_read(char *src, t_data *data);
-int		fdf_draw(t_data *data);
+typedef struct s_read
+{
+	int	i;
+	int	x;
+	int	y;
+}			t_read;
+
+typedef struct s_width
+{
+	int		i;
+	int		j;
+	int		width;
+	char	*str;
+}			t_width;
+
+void	get_input(char *src, t_data *data);
+int		draw_image(t_data *data);
 void	initialize_map(t_data *data);
 void	initialize_bresenham(t_data *data);
-int		fdf_interactive(int key, t_data *data);
+int		interactive(int key, t_data *data);
+void	print_usage(t_data *data);
+void	free_data(t_data *data);
+void	initialize_bresenham(t_data *data);
+void	initialize_map(t_data *data);
 void	print_usage(t_data *data);
 
 #endif
