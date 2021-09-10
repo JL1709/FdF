@@ -6,11 +6,11 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 16:56:28 by jludt             #+#    #+#             */
-/*   Updated: 2021/09/06 16:56:41 by jludt            ###   ########.fr       */
+/*   Updated: 2021/09/09 18:26:12 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fdf.h"
+#include "../includes/fdf.h"
 
 void	initialize_bresenham(t_data *data)
 {

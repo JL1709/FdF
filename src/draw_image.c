@@ -6,29 +6,37 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/13 13:34:47 by jludt             #+#    #+#             */
-/*   Updated: 2021/09/07 16:39:59 by jludt            ###   ########.fr       */
+/*   Updated: 2021/09/10 14:00:52 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fdf.h"
+#include "../includes/fdf.h"
 
 /*
 ** https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
 */
 
-static void	put_pixel(t_data *data)
+static void	put_pixel(t_data *data, int x_grad, int y_grad, int direction)
 {
-	int	offset;
-	int	x;
-	int	y;
+	int		offset;
+	int		x;
+	int		y;
+	float	gradient;
 
+	gradient = (float)data->depth[y_grad][x_grad] / data->gradient;
+	if (gradient == 0 && direction == 1)
+		if (data->depth[y_grad][x_grad] < data->depth[y_grad][x_grad + 1])
+			gradient = (float)data->depth[y_grad][x_grad + 1] / data->gradient;
+	if (gradient == 0 && direction == 2)
+		if (data->depth[y_grad][x_grad] < data->depth[y_grad + 1][x_grad])
+			gradient = (float)data->depth[y_grad + 1][x_grad] / data->gradient;
 	x = data->x0;
 	y = data->y0;
 	if ((x > 0 && y > 0) && (x < WINDOW_WIDTH && y < WINDOW_HEIGHT))
 	{
 		offset = y * data->size_line + x * (data->bits_per_pixel / 8);
 		data->data_addr[offset] = data->blue;
-		data->data_addr[offset + 1] = data->green;
+		data->data_addr[offset + 1] = data->green * gradient;
 		data->data_addr[offset + 2] = data->red;
 	}
 }
@@ -37,12 +45,12 @@ static void	put_pixel(t_data *data)
 ** https://de.wikipedia.org/wiki/Bresenham-Algorithmus
 */
 
-static void	bresenham(t_data *data)
+static void	bresenham(t_data *data, int x, int y, int direction)
 {
 	initialize_bresenham(data);
 	while (1)
 	{
-		put_pixel(data);
+		put_pixel(data, x, y, direction);
 		if (data->x0 == data->x1 && data->y0 == data->y1)
 			break ;
 		data->e2 = 2 * data->err;
@@ -83,7 +91,7 @@ static void	isometric_vertical(t_data *data, int x, int y)
 	data->y1 = (xc + (yc + 1)) * data->angle_y * data->zoom \
 				- data->depth[y + 1][x] * data->scale_depth \
 				+ (WINDOW_HEIGHT / 2) + data->y_translate;
-	bresenham(data);
+	bresenham(data, x, y, 2);
 }
 
 static void	isometric_horizontal(t_data *data, int x, int y)
@@ -103,7 +111,7 @@ static void	isometric_horizontal(t_data *data, int x, int y)
 	data->y1 = ((xc + 1) + yc) * data->angle_y * data->zoom \
 				- data->depth[y][x + 1] * data->scale_depth \
 				+ (WINDOW_HEIGHT / 2) + data->y_translate;
-	bresenham(data);
+	bresenham(data, x, y, 1);
 }
 
 /*

@@ -3,21 +3,26 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: julian <julian@student.42.fr>              +#+  +:+       +#+         #
+#    By: jludt <jludt@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/22 09:51:20 by jludt             #+#    #+#              #
-#    Updated: 2021/08/17 19:55:21 by julian           ###   ########.fr        #
+#    Updated: 2021/09/09 18:17:57 by jludt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-MANDATORY = ft_atoi.c \
-			ft_isalnum.c \
-			ft_isalpha.c \
-			ft_isdigit.c \
-			ft_putstr_fd.c \
-			ft_split.c 
+MANDATORY = ft_atoi.c		\
+			ft_callo.c		\
+			ft_isalnum.c	\
+			ft_isalpha.c	\
+			ft_isdigit.c	\
+			ft_putstr_fd.c	\
+			ft_split.c		\
+			ft_strchr.c		\
+			ft_strjoin.c	\
+			ft_strlen.c		\
+			get_next_line.c	\
 
 all: $(NAME)
 

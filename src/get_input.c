@@ -6,11 +6,11 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 14:39:14 by jludt             #+#    #+#             */
-/*   Updated: 2021/09/07 16:34:05 by jludt            ###   ########.fr       */
+/*   Updated: 2021/09/09 18:26:26 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fdf.h"
+#include "../includes/fdf.h"
 
 static int	get_height(char *src)
 {

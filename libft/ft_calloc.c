@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/16 15:34:53 by jludt             #+#    #+#             */
-/*   Updated: 2021/09/07 16:55:27 by jludt            ###   ########.fr       */
+/*   Created: 2021/09/09 18:13:25 by jludt             #+#    #+#             */
+/*   Updated: 2021/09/09 18:14:22 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
-{
-	int	i;
-	int	sign;
-	int	number;
+#include "libft.h"
 
-	i = 0;
-	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
-		i++;
-	sign = 1;
-	if (str[i] == '-' || str[i] == '+')
+void	*ft_calloc(size_t count, size_t size)
+{
+	unsigned char	*ptr;
+	size_t			n_bzero;
+	int				i;
+
+	ptr = malloc(count * size);
+	n_bzero = count * size;
+	if (ptr != 0)
 	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
+		i = 0;
+		while (n_bzero-- > 0)
+			ptr[i++] = '\0';
+		return (ptr);
 	}
-	number = 0;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		number = number * 10 + str[i] - 48;
-		i++;
-	}
-	return (number * sign);
+	return (0);
 }

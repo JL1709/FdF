@@ -6,11 +6,11 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/30 15:42:32 by jludt             #+#    #+#             */
-/*   Updated: 2021/08/11 11:35:26 by jludt            ###   ########.fr       */
+/*   Updated: 2021/09/09 18:33:19 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 static char	*get_temp(char *temp_old, int len_line)
 {

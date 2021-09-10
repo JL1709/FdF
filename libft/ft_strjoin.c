@@ -1,57 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/07/16 16:40:57 by julian            #+#    #+#             */
-/*   Updated: 2021/07/21 18:44:24 by jludt            ###   ########.fr       */
+/*   Created: 2021/09/09 18:15:29 by jludt             #+#    #+#             */
+/*   Updated: 2021/09/10 13:15:54 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	unsigned char	*ptr;
-	size_t			n_bzero;
-	int				i;
-
-	ptr = malloc(count * size);
-	n_bzero = count * size;
-	if (ptr != 0)
-	{
-		i = 0;
-		while (n_bzero-- > 0)
-			ptr[i++] = '\0';
-		return (ptr);
-	}
-	return (0);
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	while (*s != '\0')
-	{
-		if (*s == c)
-			return ((char *)s);
-		s++;
-	}
-	if (*s == c)
-		return ((char *)s);
-	return (NULL);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
+#include "libft.h"
 
 char	*ft_strjoin(char *s1, char *s2)
 {

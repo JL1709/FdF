@@ -6,11 +6,11 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 16:57:28 by jludt             #+#    #+#             */
-/*   Updated: 2021/09/07 15:56:51 by jludt            ###   ########.fr       */
+/*   Updated: 2021/09/09 18:26:35 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../fdf.h"
+#include "../includes/fdf.h"
 
 /*
 ** https://harm-smits.github.io/42docs/libs/minilibx/prototypes

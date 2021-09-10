@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   free_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/16 15:34:53 by jludt             #+#    #+#             */
-/*   Updated: 2021/09/07 16:55:27 by jludt            ###   ########.fr       */
+/*   Created: 2021/09/06 16:55:49 by jludt             #+#    #+#             */
+/*   Updated: 2021/09/09 18:25:50 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
-{
-	int	i;
-	int	sign;
-	int	number;
+#include "../includes/fdf.h"
 
-	i = 0;
-	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
-		i++;
-	sign = 1;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
-	}
-	number = 0;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		number = number * 10 + str[i] - 48;
-		i++;
-	}
-	return (number * sign);
+void	free_data(t_data *data)
+{
+	int	y;
+
+	y = -1;
+	while (++y < data->height)
+		free(data->depth[y]);
+	free(data->depth);
+	free(data);
 }

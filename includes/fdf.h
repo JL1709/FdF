@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/09/07 16:38:31 by jludt            ###   ########.fr       */
+/*   Updated: 2021/09/10 13:56:29 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 
 # include <stdio.h>
 # include <math.h>
-# include "mlx/mlx.h"
-# include "gnl/get_next_line.h"
-# include "libft/libft.h"
+# include "../mlx/mlx.h"
+# include "../libft/libft.h"
 
 # define WINDOW_WIDTH	1280
 # define WINDOW_HEIGHT	720
@@ -56,6 +55,10 @@ typedef struct s_data
 	int		red;
 	int		green;
 	int		blue;
+
+	int		min;
+	int		max;
+	int		gradient;
 }			t_data;
 
 typedef struct s_read
@@ -74,6 +77,8 @@ typedef struct s_width
 }			t_width;
 
 void	get_input(char *src, t_data *data);
+void	get_gradient(t_data *data);
+void	adjust_input(t_data *data);
 int		draw_image(t_data *data);
 void	initialize_map(t_data *data);
 void	initialize_bresenham(t_data *data);

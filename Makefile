@@ -6,48 +6,88 @@
 #    By: jludt <jludt@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/11 12:13:12 by jludt             #+#    #+#              #
-#    Updated: 2021/09/07 16:38:39 by jludt            ###   ########.fr        #
+#    Updated: 2021/09/10 14:18:22 by jludt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+# Name of the program
 NAME = fdf
 
-CC = gcc
+# Color codes
 
-MLXPATH = ./mlx/libmlx.a
+RESET	= \033[0m
+GREEN	= \033[32m
+YELLOW	= \033[33m
+BLUE	= \033[34m
 
-LIBFTPATH = ./libft/libft.a
+# Compiling flags
+FLAGS = -Wall -Wextra -Werror -g
 
-CFLAGS = -Wall -Werror -Wextra $(MLXPATH) $(LIBFTPATH) -framework OpenGL -framework AppKit
+# Folders
+SRC_DIR = ./src/
+OBJ_DIR = ./obj/
+INC_DIR = ./includes/
+LIBFT_DIR = ./libft/
+MINLBX_DIR = ./mlx/
 
-CFILES =	fdf.c \
-			utils/get_input.c \
-			utils/draw_image.c \
-			utils/interactive.c \
-			utils/free_data.c \
-			utils/initialize_bresenham.c \
-			utils/initialize_map.c \
-			utils/print_usage.c \
-			gnl/get_next_line.c \
-			gnl/get_next_line_utils.c 
+# Source files and object files
+SRC_FILES = fdf.c					\
+			get_input.c				\
+			get_gradient.c			\
+			adjust_input.c			\
+			draw_image.c			\
+			interactive.c			\
+			free_data.c				\
+			initialize_bresenham.c	\
+			initialize_map.c		\
+			print_usage.c
+OBJ_FILES = $(SRC_FILES:.c=.o)
 
-OBJECTS = $(CFILES:.c=.o)
+# Paths
+SRC = $(addprefix $(SRC_DIR), $(SRC_FILES))
+OBJ = $(addprefix $(OBJ_DIR), $(OBJ_FILES))
+LIBFT = $(addprefix $(LIBFT_DIR), libft.a)
+MINLBX	= $(addprefix $(MINLBX_DIR), libmlx.a)
 
-$(NAME):
-	make --directory=./mlx
-	make --directory=./libft
-	$(CC) $(CFILES) $(CFLAGS) -o $(NAME)
+# Libft and Minilibx linkers
+LNK  = -L $(LIBFT_DIR) -lft -L $(MINLBX_DIR) \
+			-lmlx -framework OpenGL -framework AppKit
 
-clean: 
-	rm -f $(OBJECTS)
-	make clean --directory=./libft
-	make clean --directory=./mlx
+# all rule
+all: obj $(LIBFT) $(MINLBX) $(NAME)
 
-fclean:
-	rm -f $(NAME) $(OBJECTS)
-	make fclean --directory=./libft
-	make clean --directory=./mlx
+obj:
+	@mkdir -p $(OBJ_DIR)
+$(OBJ_DIR)%.o:$(SRC_DIR)%.c
+	@gcc $(FLAGS) -I $(MINLBX_DIR) -I $(LIBFT_DIR) -I $(INC_DIR) -o $@ -c $<
+$(LIBFT):
+	@make -C $(LIBFT_DIR)
+$(MINLBX):
+	@make -C $(MINLBX_DIR)
 
-re: fclean $(NAME)
-	make re --directory=./libft
-	make re --directory=./mlx
+# Compiling
+$(NAME): $(OBJ)
+	@echo "$(YELLOW)\n      -> Building $(BLUE)$(NAME) $(YELLOW)...$(RESET)"
+	@gcc $(OBJ) $(LNK) -lm -o $(NAME)
+	@echo "$(GREEN)***   Project $(NAME) successfully compiled   ***\n$(RESET)"
+
+# clean rule
+clean:
+	@echo "$(GREEN)***   Deleting all objects from $(NAME)   ...   ***$(RESET)"
+	@rm -Rf $(OBJ_DIR)
+	@make -C $(LIBFT_DIR) clean
+	@make -C $(MINLBX_DIR) clean
+	@echo
+
+# fclean rule
+fclean: clean
+	@echo "$(GREEN)***   Deleting executable file from $(NAME)   ...   ***$(RESET)"
+	@rm -f $(NAME)
+	@make -C $(LIBFT_DIR) fclean
+	@echo
+
+# re rule
+re: fclean all
+
+# phony
+.PHONY: all clean fclean re

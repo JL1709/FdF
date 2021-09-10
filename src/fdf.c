@@ -6,12 +6,11 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 11:16:27 by jludt             #+#    #+#             */
-/*   Updated: 2021/09/07 16:38:21 by jludt            ###   ########.fr       */
+/*   Updated: 2021/09/10 13:54:13 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
-#include <stdio.h>
+#include "../includes/fdf.h"
 
 /*
 ** https://harm-smits.github.io/42docs/libs/minilibx
@@ -27,6 +26,9 @@ int	main(int argc, char *argv[])
 	if (data == NULL)
 		return (0);
 	get_input(argv[1], data);
+	get_gradient(data);
+	if (data->min < 0)
+		adjust_input(data);
 	initialize_map(data);
 	data->init = mlx_init();
 	data->win = mlx_new_window(data->init, WINDOW_WIDTH, WINDOW_HEIGHT, "FdF");

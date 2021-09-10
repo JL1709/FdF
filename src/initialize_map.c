@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   initialize_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/16 15:34:53 by jludt             #+#    #+#             */
-/*   Updated: 2021/09/07 16:55:27 by jludt            ###   ########.fr       */
+/*   Created: 2021/09/06 16:56:47 by jludt             #+#    #+#             */
+/*   Updated: 2021/09/10 12:55:57 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
-{
-	int	i;
-	int	sign;
-	int	number;
+#include "../includes/fdf.h"
 
-	i = 0;
-	while (str[i] == ' ' || (str[i] >= '\t' && str[i] <= '\r'))
-		i++;
-	sign = 1;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign = -1;
-		i++;
-	}
-	number = 0;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		number = number * 10 + str[i] - 48;
-		i++;
-	}
-	return (number * sign);
+void	initialize_map(t_data *data)
+{
+	data->scale_depth = 1.00;
+	data->angle_x = cos(0.8);
+	data->angle_y = sin(0.5);
+	data->x_translate = 0;
+	data->y_translate = 0;
+	data->zoom = ((WINDOW_WIDTH / data->width) \
+				+ (WINDOW_HEIGHT / data->height)) / 3;
+	data->blue = 0x6F;
+	data->green = 0x6F;
+	data->red = 0x00;
 }
