@@ -6,7 +6,7 @@
 #    By: julian <julian@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/11 12:13:12 by jludt             #+#    #+#              #
-#    Updated: 2021/09/12 13:54:38 by julian           ###   ########.fr        #
+#    Updated: 2021/09/12 14:11:29 by julian           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ YELLOW	= \033[33m
 BLUE	= \033[34m
 
 # Compiling flags
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror
 
 # Folders
 SRC_DIR = ./src/
