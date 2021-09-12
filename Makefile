@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jludt <jludt@student.42.fr>                +#+  +:+       +#+         #
+#    By: julian <julian@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/11 12:13:12 by jludt             #+#    #+#              #
-#    Updated: 2021/09/10 14:18:22 by jludt            ###   ########.fr        #
+#    Updated: 2021/09/12 13:54:38 by julian           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ LIBFT_DIR = ./libft/
 MINLBX_DIR = ./mlx/
 
 # Source files and object files
-SRC_FILES = fdf.c					\
+SRC_FILES = main.c					\
 			get_input.c				\
 			get_gradient.c			\
 			adjust_input.c			\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   initialize_map.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
+/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 16:56:47 by jludt             #+#    #+#             */
-/*   Updated: 2021/09/10 12:55:57 by jludt            ###   ########.fr       */
+/*   Updated: 2021/09/12 13:56:21 by julian           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,5 @@ void	initialize_map(t_data *data)
 				+ (WINDOW_HEIGHT / data->height)) / 3;
 	data->blue = 0x6F;
 	data->green = 0x6F;
-	data->red = 0x00;
+	data->red = 0x6F;
 }
