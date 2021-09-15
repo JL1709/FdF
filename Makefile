@@ -6,7 +6,7 @@
 #    By: julian <julian@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/11 12:13:12 by jludt             #+#    #+#              #
-#    Updated: 2021/09/12 14:11:29 by julian           ###   ########.fr        #
+#    Updated: 2021/09/15 13:16:37 by julian           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,13 +67,13 @@ $(MINLBX):
 
 # Compiling
 $(NAME): $(OBJ)
-	@echo "$(YELLOW)\n      -> Building $(BLUE)$(NAME) $(YELLOW)...$(RESET)"
+	@echo "$(YELLOW)\n      -> Building $(NAME) ...$(RESET)"
 	@gcc $(OBJ) $(LNK) -lm -o $(NAME)
 	@echo "$(GREEN)***   Project $(NAME) successfully compiled   ***\n$(RESET)"
 
 # clean rule
 clean:
-	@echo "$(GREEN)***   Deleting all objects from $(NAME)   ...   ***$(RESET)"
+	@echo "$(BLUE)***   Deleting all objects from $(NAME)   ...   ***$(RESET)"
 	@rm -Rf $(OBJ_DIR)
 	@make -C $(LIBFT_DIR) clean
 	@make -C $(MINLBX_DIR) clean
@@ -81,7 +81,7 @@ clean:
 
 # fclean rule
 fclean: clean
-	@echo "$(GREEN)***   Deleting executable file from $(NAME)   ...   ***$(RESET)"
+	@echo "$(BLUE)***   Deleting executable file from $(NAME)   ...   ***$(RESET)"
 	@rm -f $(NAME)
 	@make -C $(LIBFT_DIR) fclean
 	@echo
