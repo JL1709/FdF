@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/09/10 13:56:29 by jludt            ###   ########.fr       */
+/*   Updated: 2021/09/20 10:33:13 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,5 @@ void	initialize_bresenham(t_data *data);
 int		interactive(int key, t_data *data);
 void	print_usage(t_data *data);
 void	free_data(t_data *data);
-void	initialize_bresenham(t_data *data);
-void	initialize_map(t_data *data);
-void	print_usage(t_data *data);
 
 #endif
