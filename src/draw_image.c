@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: julian <julian@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/13 13:34:47 by jludt             #+#    #+#             */
-/*   Updated: 2021/09/12 13:58:44 by julian           ###   ########.fr       */
+/*   Updated: 2021/09/20 09:38:27 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	put_pixel(t_data *data, int x_grad, int y_grad, int direction)
 		offset = y * data->size_line + x * (data->bits_per_pixel / 8);
 		data->data_addr[offset] = data->blue;
 		data->data_addr[offset + 1] = data->green * gradient;
-		data->data_addr[offset + 2] = data->red * (gradient/2);
+		data->data_addr[offset + 2] = data->red * (gradient / 2);
 	}
 }
 
