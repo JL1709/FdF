@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/16 09:56:26 by jludt             #+#    #+#             */
-/*   Updated: 2021/09/09 18:28:01 by jludt            ###   ########.fr       */
+/*   Updated: 2021/09/20 16:56:05 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		ft_atoi(const char *str);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
-void	ft_putstr_fd(char *s, int fd);
+void	ft_putstr(char *s);
 char	**ft_split(char const *s, char c);
 char	*get_next_line(int fd);
 char	*ft_strchr(const char *s, int c);

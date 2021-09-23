@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: julian <julian@student.42.fr>              +#+  +:+       +#+         #
+#    By: jludt <jludt@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/11 12:13:12 by jludt             #+#    #+#              #
-#    Updated: 2021/09/15 13:16:37 by julian           ###   ########.fr        #
+#    Updated: 2021/09/20 17:27:42 by jludt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ MINLBX_DIR = ./mlx/
 
 # Source files and object files
 SRC_FILES = main.c					\
+			error_management.c		\
 			get_input.c				\
 			get_gradient.c			\
 			adjust_input.c			\
@@ -40,6 +41,7 @@ SRC_FILES = main.c					\
 			free_data.c				\
 			initialize_bresenham.c	\
 			initialize_map.c		\
+			pr_error.c				\
 			print_usage.c
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

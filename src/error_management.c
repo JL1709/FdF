@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   error_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/24 17:54:20 by jludt             #+#    #+#             */
-/*   Updated: 2021/07/01 11:39:13 by jludt            ###   ########.fr       */
+/*   Created: 2021/09/20 17:24:53 by jludt             #+#    #+#             */
+/*   Updated: 2021/09/20 18:51:19 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/fdf.h"
 
-/*
-** Outputs the string ’s’ to the given file descriptor.
-** parameters:
-** s - The string to output.
-** fd - The file descriptor on which to write.
-** return value: none
-*/
-
-void	ft_putstr_fd(char *s, int fd)
+int	error_management(char *s)
 {
-	if (s)
-		while (*s != '\0')
-			write(fd, s++, 1);
+	int	file;
+
+	file = open(s, O_RDONLY);
+	if (file < 0)
+		return (pr_error(strerror(errno), s));
+	close (file);
+	return (0);
 }

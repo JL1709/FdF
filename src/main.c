@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/11 11:16:27 by jludt             #+#    #+#             */
-/*   Updated: 2021/09/10 13:54:13 by jludt            ###   ########.fr       */
+/*   Updated: 2021/09/20 18:44:29 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int	main(int argc, char *argv[])
 	t_data	*data;
 
 	if (argc != 2)
-		return (0);
+		return (pr_error(NULL, "Program takes one argument!"));
+	if (error_management(argv[1]) != 0)
+		return (1);
 	data = (t_data *)malloc(sizeof(t_data));
 	if (data == NULL)
 		return (0);

@@ -6,7 +6,7 @@
 #    By: jludt <jludt@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/06/22 09:51:20 by jludt             #+#    #+#              #
-#    Updated: 2021/09/09 18:17:57 by jludt            ###   ########.fr        #
+#    Updated: 2021/09/20 16:56:23 by jludt            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ MANDATORY = ft_atoi.c		\
 			ft_isalnum.c	\
 			ft_isalpha.c	\
 			ft_isdigit.c	\
-			ft_putstr_fd.c	\
+			ft_putstr.c		\
 			ft_split.c		\
 			ft_strchr.c		\
 			ft_strjoin.c	\

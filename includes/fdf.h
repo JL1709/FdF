@@ -6,7 +6,7 @@
 /*   By: jludt <jludt@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 15:08:57 by julian            #+#    #+#             */
-/*   Updated: 2021/09/20 10:33:13 by jludt            ###   ########.fr       */
+/*   Updated: 2021/09/23 09:14:20 by jludt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <math.h>
+# include <errno.h>
 # include "../mlx/mlx.h"
 # include "../libft/libft.h"
 
@@ -76,6 +77,8 @@ typedef struct s_width
 	char	*str;
 }			t_width;
 
+int		pr_error(char *s1, char *s2);
+int		error_management(char *s);
 void	get_input(char *src, t_data *data);
 void	get_gradient(t_data *data);
 void	adjust_input(t_data *data);
