@@ -25,7 +25,7 @@ cd selfcontact
 make
 ```
 
-#### 2)  Run program
+#### 3)  Run program
 ```
 ./fdf
 ```
