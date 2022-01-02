@@ -13,7 +13,7 @@ git clone git@github.com:JL1709/FdF.git
 
 #### 2) Execute Makfile
 ```
-cd Fdf
+cd FdF
 make
 ```
 
