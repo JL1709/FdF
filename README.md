@@ -3,7 +3,6 @@ This repo provides the program "fdf" that creates a simplified 3D graphic “wir
 Tested on macOS Monterey.
 
 ![Teaser SMPLify-XMC](mars.png)
-<img src="teaser_result.png" height="200" alt="mars landscape" class="center"> \
 
 ## Installation
 
