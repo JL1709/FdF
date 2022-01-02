@@ -17,7 +17,7 @@ cd FdF
 make
 ```
 
-#### 3)  Run program
+#### 3)  Run program, for example:
 ```
 ./fdf maps/42.fdf
 ```
