@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jludt <jludt@student.42.fr>                +#+  +:+       +#+         #
+#    By: julian <julian@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/11 12:13:12 by jludt             #+#    #+#              #
-#    Updated: 2021/09/20 17:27:42 by jludt            ###   ########.fr        #
+#    Updated: 2022/01/02 17:30:44 by julian           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,14 +79,12 @@ clean:
 	@rm -Rf $(OBJ_DIR)
 	@make -C $(LIBFT_DIR) clean
 	@make -C $(MINLBX_DIR) clean
-	@echo
 
 # fclean rule
 fclean: clean
 	@echo "$(BLUE)***   Deleting executable file from $(NAME)   ...   ***$(RESET)"
 	@rm -f $(NAME)
 	@make -C $(LIBFT_DIR) fclean
-	@echo
 
 # re rule
 re: fclean all
