@@ -5,12 +5,12 @@
 
 #### 1) Clone this repository 
 ```
-git clone git@github.com:muelea/selfcontact.git
-cd selfcontact
+git clone git@github.com:JL1709/FdF.git
 ```
 
 #### 2) Execute Makfile
 ```
+cd Fdf
 make
 ```
 
